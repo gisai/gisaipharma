@@ -1,0 +1,7 @@
+.DS_Store
+config_aws.json
+config.json
+epcis-captureclient-0.5.0
+epcis-queryclient-0.5.0
+node_modules
+scripts

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>GISAI PHARMA 1.1</title>
+	<link rel="stylesheet" href="css/app.css" type="text/css">
+	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+	<link rel="stylesheet" href="css/bootstrap-responsive.min.css" type="text/css">
+
+	<link rel="stylesheet" href="sdk/resources/css/sencha-touch.css" type="text/css">
+	<link rel="stylesheet" href="css/jquery-ui-1.8.18.custom.css" type="text/css">
+
+	<script type="text/javascript" src="jquery.min.js"></script>
+	<script type="text/javascript" src="jquery-ui-1.8.18.custom.min.js"></script>
+	<script type="text/javascript" src="jquery.jsPlumb-1.3.8-all.js "></script>
+	
+	<script src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript">
+		var username;// captura los datos de session del usuario
+		var position;
+		var socketsession= io.connect('/session');
+		socketsession.on('name',function(data){
+			username=data.name;
+			var headID = document.getElementsByTagName("head")[0];         
+			var newScript1 = document.createElement('script');
+			var newScript2 = document.createElement('script');
+			var newScript3 = document.createElement('script');
+			newScript1.type = 'text/javascript';
+			newScript1.src = 'sdk/sencha-touch-debug.js';
+			newScript2.type = 'text/javascript';
+			newScript2.src = 'all-classes.js';
+			newScript3.type = 'text/javascript';
+			newScript3.src = 'app.js';
+			headID.appendChild(newScript1);
+			$(newScript1).load(function(){
+				headID.appendChild(newScript2);
+				$(newScript2).load(function(){
+					headID.appendChild(newScript3);
+				});
+			});
+		});
+	</script>
+</head>
+<body>
+</body>
+</html>
+
