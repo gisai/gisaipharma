@@ -16,7 +16,12 @@ if(process.argv.length < 3 || domain_id < 0 || domain_id > 2){
 var firstRun = process.argv[3]||false;
 var configurationFile = "config.json";
 var email = [],numerosTelefono=[],epcs=[],arcos=[];
-require('./users'); require('./services'); require('./servicerules'); require('./actions'), require('./conditions'),require('./events')
+require('./users');
+require('./services');
+require('./servicerules');
+require('./actions');
+require('./conditions');
+require('./events');
 var sys = require('util'),
 	http = require('http'),
 	fs = require('fs');
@@ -36,7 +41,7 @@ var io = require('socket.io'),
 	mongoose = require('mongoose'),
 	connect = require('connect');
 
-var dbUrl = "mongodb://"+config.db.host+"/"+config.db.name+"_"+config.domain;
+var dbUrl = "mongodb://"+config.db.user+":"+config.db.password+"@"+config.db.host+"/"+config.db.name+"_"+config.domain;
 var db = mongoose.connect(dbUrl);
 var parser = new xml2js.Parser();
 var express = require('express');
@@ -371,7 +376,7 @@ var socketsession=socket.of('/session').authorization(function(hsData,callback){
 
 //var port = process.env.PORT || 5000;
 app.listen(config.port, function() {
-  console.log("\n-----Running domain " + config.domain +" on port " + config.port+"-----\n);
+  console.log("\n-----Running domain " + config.domain +" on port " + config.port+"-----\n");
 });
 
 /* 
